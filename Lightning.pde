@@ -1,7 +1,6 @@
 void setup()
 {
   size(300,300);
-
 }
 int startX = mouseX;
 int startY = 0;
@@ -13,14 +12,21 @@ int dudeY = 250;
 
 boolean isPressed = false;
 
+Branch trunk = new Branch(mouseX, 0, (int)(Math.random())+mouseX,(int)((Math.random()*18)-9));
+
 void draw()
 {
 	if(isPressed == true)
 	{
-		stroke((float)(Math.random()*255),(float)(Math.random()*255),(float)(Math.random()*255));
+		//stroke((float)(Math.random()*255),(float)(Math.random()*255),(float)(Math.random()*255));
 		//background((float)(Math.random()*255),(float)(Math.random()*255),(float)(Math.random()*255));
-		branch(startX,startY,endX,endY);
+		trunk.grow();
+		if(trunk.bStartY >= 0)
+		{
+			trunk.bStartX = mouseX;
+		}
 		//branch(endX,endY,endX+(int)((Math.random()*18)-9),endY+(int)((Math.random()*9)));
+
 	}
 	if(keyPressed == true && keyCode == UP)
 	{
@@ -30,10 +36,6 @@ void draw()
 void mousePressed()
 {
 	isPressed = true;
-	startX = mouseX;
-	startY = 0;
-	endX = (int)(Math.random())+mouseX;
-	endY = (int)((Math.random()*18)-9);
 }
 void lines()
 {
@@ -43,13 +45,25 @@ void lines()
 	endX += (int)((Math.random()*18)-9);
 	endY += (int)((Math.random()*9));
 }
-void branch(int bStartX,int bStartY,int bEndX,int bEndY)
+class Branch
 {
+	int bStartX, bStartY, bEndX, bEndY;
+
+	Branch(int sx,int sy,int ex,int ey)
+	{
+		bStartX = sx;
+		bStartY = sy;
+		bEndX = ex;
+		bEndY = ey;
+	}
+	void grow()
+	{
 		stroke(255,0,0);
 		line(bStartX,bStartY,bEndX,bEndY);
-		startX = bEndX;
-		startY = bEndY;
-		endX += (int)((Math.random()*18)-9);
-		endY += (int)((Math.random()*9));
+		bStartX = bEndX;
+		bStartY = bEndY;
+		bEndX += (int)((Math.random()*18)-9);
+		bEndY += (int)((Math.random()*9));
+	}
 }
 
