@@ -1,6 +1,7 @@
 void setup()
 {
   size(300,300);
+  background((float)(Math.random()*255),(float)(Math.random()*255),(float)(Math.random()*255));
 }
 int startX = mouseX;
 int startY = 0;
@@ -20,22 +21,28 @@ void draw()
 	{
 		//stroke((float)(Math.random()*255),(float)(Math.random()*255),(float)(Math.random()*255));
 		//background((float)(Math.random()*255),(float)(Math.random()*255),(float)(Math.random()*255));
+
 		trunk.grow();
-		if(trunk.bStartY >= 0)
-		{
-			trunk.bStartX = mouseX;
-		}
 		//branch(endX,endY,endX+(int)((Math.random()*18)-9),endY+(int)((Math.random()*9)));
 
 	}
 	if(keyPressed == true && keyCode == UP)
 	{
-		background(255);
+		background((float)(Math.random()*255),(float)(Math.random()*255),(float)(Math.random()*255));
 	}
 }
 void mousePressed()
 {
 	isPressed = true;
+	trunk.bStartX = mouseX;
+	trunk.bStartY = 0;
+	trunk.bEndX = (int)((Math.random())+mouseX);
+	trunk.bEndY = (int)((Math.random()*18)-9);
+	fill((float)(Math.random()*255),(float)(Math.random()*255),(float)(Math.random()*255));
+	textSize(64);
+	textAlign(LEFT);
+	text("YAY !",0,0,200,200);
+
 }
 void lines()
 {
@@ -58,7 +65,7 @@ class Branch
 	}
 	void grow()
 	{
-		stroke(255,0,0);
+		stroke((float)(Math.random()*255),(float)(Math.random()*255),(float)(Math.random()*255));
 		line(bStartX,bStartY,bEndX,bEndY);
 		bStartX = bEndX;
 		bStartY = bEndY;
